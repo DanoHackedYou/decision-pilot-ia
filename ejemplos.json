@@ -1,0 +1,90 @@
+{
+  "version": "1.0",
+  "app": "Decision Pilot IA",
+  "descripcion": "Casos precargados para uso educativo en el aula.",
+  "casos": [
+    {
+      "id": "admision",
+      "nombre": "Admisión y becas universitarias",
+      "icono": "🎓",
+      "descripcion": "Selección de candidatos a beca en una universidad privada con presupuesto limitado y criterios mixtos de mérito y equidad.",
+      "contexto": "La Universidad Abierta del Sur dispone de 40 plazas de beca para el semestre de otoño. Se han recibido 214 solicitudes. El presupuesto total es de 120.000 €, distribuido entre becas completas (100 % de matrícula, 3.200 €) y parciales (50 %, 1.600 €). El comité de admisiones debe resolver antes del 15 del mes próximo.",
+      "decision": "¿Qué combinación de becas completas y parciales asignar, y con qué criterios de priorización, para maximizar equidad y sostenibilidad financiera?",
+      "datos_disponibles": "Nota media del expediente académico (0-10). Nivel de ingresos familiares declarado (tramos IRPF). Carta de motivación evaluada por tutor (1-5). Resultado de entrevista personal (1-10). Indicador de primera generación universitaria (sí/no). Historial de beca previa en la misma institución.",
+      "restricciones": "Presupuesto máximo: 120.000 €. Mínimo 30 % de plazas reservadas a primera generación universitaria. No más del 25 % de becas completas sobre el total. Resolución obligatoria antes del día 15. Cumplimiento de la normativa de igualdad de oportunidades y LOPD.",
+      "metricas": {
+        "solicitudes_recibidas": 214,
+        "plazas_disponibles": 40,
+        "presupuesto_total_eur": 120000,
+        "coste_beca_completa_eur": 3200,
+        "coste_beca_parcial_eur": 1600,
+        "tasa_conversion_historica_pct": 18,
+        "tasa_abandono_becados_pct": 9
+      },
+      "riesgo_principal": "Sesgo en los criterios de selección que favorezca sistemáticamente a candidatos de determinado perfil socioeconómico o geográfico, con consecuencias legales y reputacionales para la institución."
+    },
+    {
+      "id": "it-support",
+      "nombre": "Tickets internos de soporte TI",
+      "icono": "🖥️",
+      "descripcion": "Gestión de un incidente crítico en el ERP corporativo que bloquea el cierre contable mensual con el SLA del proveedor en riesgo.",
+      "contexto": "El módulo de facturación del ERP (SAP S/4HANA) lleva 4 horas y 20 minutos sin responder. Los departamentos de Finanzas, Ventas y Logística están bloqueados. El cierre contable mensual vence hoy a las 18:00 (quedan 1 hora 40 minutos). El proveedor SAP no responde al canal de soporte P1. La última actualización del sistema se aplicó hace 48 horas.",
+      "decision": "¿Ejecutamos un rollback al backup de anoche, activamos el plan de continuidad manual o escalamos al comité de crisis TI y esperamos respuesta del proveedor?",
+      "datos_disponibles": "Logs del sistema de las últimas 6 horas. Backup diario disponible (ayer 23:00, hace 17 horas). Registro del parche aplicado hace 48 horas. Número de usuarios bloqueados: 45. Facturas urgentes pendientes de emisión: 3 (valor total: 48.000 €). SLA contratado con SAP: resolución P1 en 4 horas (ya incumplido).",
+      "restricciones": "El rollback implica pérdida de 17 horas de transacciones registradas manualmente. El plan de continuidad manual requiere 6 personas actualmente en reunión externa (disponibles en 45 min). Los logs contienen datos personales sujetos a GDPR: no pueden compartirse con soporte externo sin cifrar. Presupuesto de contingencia TI disponible: 8.000 €.",
+      "metricas": {
+        "usuarios_bloqueados": 45,
+        "horas_sistema_caido": 4.3,
+        "minutos_para_cierre_contable": 100,
+        "valor_facturas_pendientes_eur": 48000,
+        "sla_contratado_horas_p1": 4,
+        "coste_hora_inactividad_estimado_eur": 3200,
+        "incidentes_p1_ultimos_90_dias": 2
+      },
+      "riesgo_principal": "El rollback elimina transacciones recientes que deberán reconstruirse manualmente; si el proceso tarda más de lo previsto, el cierre contable incumple plazos regulatorios con posible sanción."
+    },
+    {
+      "id": "ecommerce-fraude",
+      "nombre": "Devoluciones y fraude en e-commerce",
+      "icono": "📦",
+      "descripcion": "Evaluación de una solicitud de devolución de alto valor con señales mixtas de fraude y perfil de cliente con historial relevante.",
+      "contexto": "La plataforma MarketNow recibe una solicitud de devolución de un pedido de 890 € (zapatillas edición limitada) del cliente ID-77423. El motivo alegado: 'producto defectuoso al llegar'. Las fotos adjuntas muestran desgaste consistente con uso prolongado, no defecto de fabricación. El cliente ha realizado 4 devoluciones en los últimos 3 meses. Su LTV acumulado es de 2.400 € en 18 meses.",
+      "decision": "¿Aprobamos la devolución completa, ofrecemos una compensación alternativa (vale, cambio de talla) o rechazamos por incumplimiento de la política de devoluciones?",
+      "datos_disponibles": "Historial del cliente: 12 pedidos, 4 devoluciones en 90 días. Tasa de devolución media del catálogo: 8 %. Score de riesgo interno del cliente: 67/100 (umbral de bloqueo automático: 75). Fotos del producto adjuntas: desgaste visible en suela y lateral. Política vigente: devolución en 30 días, producto sin usar y con etiqueta. Día de la solicitud: 22 días tras la entrega.",
+      "restricciones": "Directiva europea 2011/83/UE: derecho de desistimiento de 14 días ya superado. Coste logístico de devolución asumido por la empresa: 18 €. Chargeback ratio actual: 0,8 % (límite Visa/Mastercard para no perder el contrato: 1 %). El cliente ha mencionado en el chat que publicará una reseña negativa. Plazo de respuesta máximo al cliente: 24 horas.",
+      "metricas": {
+        "valor_pedido_eur": 890,
+        "ltv_cliente_eur": 2400,
+        "devoluciones_ultimos_90_dias": 4,
+        "total_pedidos_cliente": 12,
+        "score_riesgo_sobre_100": 67,
+        "umbral_bloqueo_score": 75,
+        "tasa_devolucion_catalogo_pct": 8,
+        "chargeback_ratio_actual_pct": 0.8,
+        "coste_logistico_devolucion_eur": 18
+      },
+      "riesgo_principal": "Aprobar la devolución sin evidencia puede consolidar un patrón de abuso de política (fraude amistoso); rechazarla sin argumento sólido puede derivar en chargeback, reseña negativa y pérdida del cliente."
+    },
+    {
+      "id": "documentacion-corp",
+      "nombre": "Documentación corporativa interna",
+      "icono": "📋",
+      "descripcion": "Decisión sobre cómo renovar el manual de onboarding de una empresa que ha triplicado su plantilla en remoto en dos años.",
+      "contexto": "TechBridge S.L. tiene un manual de incorporación de empleados (onboarding) en Word, versión 2021, de 47 páginas. La empresa ha pasado de 40 a 130 empleados en dos años, con el 60 % en modalidad remota. El manual no menciona herramientas digitales actuales (Notion, Teams, SAP SuccessFactors), cita procesos obsoletos y la encuesta de satisfacción del último onboarding obtuvo 5,2 sobre 10. Hay 8 nuevas incorporaciones previstas en las próximas 6 semanas.",
+      "decision": "¿Actualizamos el manual Word por secciones, lo redactamos desde cero en un nuevo formato o lo convertimos en un microsite interactivo en la intranet de Notion?",
+      "datos_disponibles": "Manual actual: Word 47 páginas, v2021. Encuesta satisfacción onboarding: 5,2/10 (n=23). Comentarios frecuentes: 'demasiado largo', 'información desactualizada', 'no encuentro lo que busco'. Responsables disponibles para revisión: 3 personas, 2 horas/semana cada una. Herramientas corporativas activas: Notion, Microsoft Teams, SAP SuccessFactors, SharePoint.",
+      "restricciones": "Presupuesto: 0 € (solución 100 % interna). Plazo máximo para versión operativa: 3 semanas. Aprobación obligatoria de Dirección General y Comité de Empresa. Idiomas requeridos: español e inglés. El nuevo formato debe integrarse con el flujo de alta en SAP SuccessFactors. No se pueden eliminar cláusulas legales del manual actual sin validación del departamento jurídico.",
+      "metricas": {
+        "empleados_actuales": 130,
+        "empleados_en_remoto_pct": 60,
+        "paginas_manual_actual": 47,
+        "antiguedad_manual_anios": 3,
+        "satisfaccion_onboarding_sobre_10": 5.2,
+        "encuestas_respondidas": 23,
+        "incorporaciones_proximas_6_semanas": 8,
+        "horas_revision_disponibles_semana": 6
+      },
+      "riesgo_principal": "Un manual desactualizado genera incorporaciones inconsistentes, errores en herramientas críticas (SAP) y riesgo de incumplimiento en cláusulas legales si se modifica sin validación jurídica."
+    }
+  ]
+}

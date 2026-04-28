@@ -1,0 +1,869 @@
+/* ════════════════════════════════════════════════════════════
+   DECISION PILOT IA — style.css
+   Orden de bloques:
+   0. Variables y reset
+   1. Base y tipografía
+   2. Layout global
+   3. Cabecera
+   4. Paneles
+   5. Selector de caso (cards)
+   6. Formulario
+   7. Botones
+   8. Zona de output
+   9. Nota pedagógica
+  10. Pie de página
+  11. Utilidades y estados
+  12. Responsive (móvil)
+════════════════════════════════════════════════════════════ */
+
+
+/* ──────────────────────────────────────────
+   0. VARIABLES Y RESET
+────────────────────────────────────────── */
+
+:root {
+  /* Paleta principal */
+  --color-bg:          #f7f8fa;
+  --color-surface:     #ffffff;
+  --color-border:      #e2e7ef;
+  --color-border-focus:#2563eb;
+
+  /* Texto */
+  --color-text:        #1a1e2c;
+  --color-text-muted:  #5a6375;
+  --color-text-hint:   #8a93a6;
+
+  /* Acento institucional */
+  --color-accent:      #2563eb;
+  --color-accent-dark: #1d4ed8;
+  --color-accent-pale: #eef2ff;
+
+  /* Estados */
+  --color-success:     #16a34a;
+  --color-success-pale:#f0fdf4;
+  --color-ghost-hover: #f1f3f7;
+
+  /* Output */
+  --color-output-bg:   #eef2ff;
+  --color-output-border:#c7d4f8;
+
+  /* Badges de pasos */
+  --color-badge-bg:    #1a1e2c;
+  --color-badge-text:  #ffffff;
+
+  /* Nota pedagógica */
+  --color-note-bg:     #fffbeb;
+  --color-note-border: #fcd34d;
+
+  /* Tipografía */
+  --font-display: 'Syne', system-ui, sans-serif;
+  --font-body:    'DM Sans', system-ui, sans-serif;
+  --font-mono:    'Courier New', 'Courier', monospace;
+
+  /* Tamaños de fuente */
+  --fs-xs:   0.75rem;   /*  12px */
+  --fs-sm:   0.875rem;  /*  14px */
+  --fs-base: 1rem;      /*  16px */
+  --fs-md:   1.125rem;  /*  18px */
+  --fs-lg:   1.375rem;  /*  22px */
+  --fs-xl:   1.75rem;   /*  28px */
+  --fs-2xl:  2.25rem;   /*  36px */
+
+  /* Espaciado */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+
+  /* Bordes y sombras */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --shadow-sm:  0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --shadow-md:  0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.05);
+  --shadow-focus: 0 0 0 3px rgba(37,99,235,.25);
+
+  /* Transición estándar */
+  --transition: 180ms ease;
+
+  /* Ancho máximo de contenido */
+  --max-width: 780px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Elimina estilos propios de fieldset sin romper semántica */
+fieldset {
+  border: none;
+  min-width: 0;
+}
+
+
+/* ──────────────────────────────────────────
+   1. BASE Y TIPOGRAFÍA
+────────────────────────────────────────── */
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  font-weight: 400;
+  line-height: 1.65;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+p { max-width: 68ch; }
+
+strong { font-weight: 600; }
+
+em { font-style: italic; }
+
+a {
+  color: var(--color-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color var(--transition);
+}
+
+a:hover { color: var(--color-accent-dark); }
+
+/* Foco visible para teclado */
+:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}
+
+
+/* ──────────────────────────────────────────
+   2. LAYOUT GLOBAL
+────────────────────────────────────────── */
+
+main {
+  flex: 1;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-8) var(--space-6) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+
+/* ──────────────────────────────────────────
+   3. CABECERA
+────────────────────────────────────────── */
+
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: var(--space-8) var(--space-6);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.brand-icon {
+  color: var(--color-accent);
+  font-size: var(--fs-md);
+  line-height: 1;
+}
+
+.brand-name em {
+  color: var(--color-accent);
+  font-style: normal;
+}
+
+.site-title {
+  font-size: var(--fs-xl);
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: var(--space-2);
+}
+
+.site-subtitle {
+  font-size: var(--fs-md);
+  font-weight: 300;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  max-width: 62ch;
+}
+
+
+/* ──────────────────────────────────────────
+   4. PANELES
+────────────────────────────────────────── */
+
+.panel {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-8);
+  box-shadow: var(--shadow-sm);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+  flex-wrap: wrap;
+}
+
+/* Cuando el header tiene botón (panel output), el título empuja el botón a la derecha */
+#panel-output .panel-header {
+  justify-content: flex-start;
+}
+
+#panel-output .panel-header .btn {
+  margin-left: auto;
+}
+
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  background-color: var(--color-badge-bg);
+  color: var(--color-badge-text);
+  font-family: var(--font-display);
+  font-size: var(--fs-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* Panel output: fondo diferenciado */
+.panel-output {
+  background-color: var(--color-output-bg);
+  border-color: var(--color-output-border);
+}
+
+
+/* ──────────────────────────────────────────
+   5. SELECTOR DE CASO (cards)
+────────────────────────────────────────── */
+
+.case-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-4);
+}
+
+/* Ocultar el radio nativo */
+.case-radio {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.case-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  background-color: var(--color-bg);
+  transition: border-color var(--transition),
+              background-color var(--transition),
+              box-shadow var(--transition);
+}
+
+.case-card:hover {
+  border-color: var(--color-accent);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Estado seleccionado */
+.case-radio:checked + .case-icon,
+.case-card:has(.case-radio:checked) {
+  /* fallback handled below */
+}
+
+.case-card:has(.case-radio:checked) {
+  border-color: var(--color-accent);
+  background-color: var(--color-accent-pale);
+  box-shadow: var(--shadow-md);
+}
+
+.case-icon {
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.case-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.3;
+}
+
+.case-desc {
+  font-size: var(--fs-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+
+/* ──────────────────────────────────────────
+   6. FORMULARIO
+────────────────────────────────────────── */
+
+#decision-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.field-label {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.field-hint {
+  font-size: var(--fs-xs);
+  font-weight: 400;
+  color: var(--color-text-hint);
+}
+
+.field-textarea {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  resize: vertical;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  min-height: 88px;
+}
+
+.field-textarea::placeholder {
+  color: var(--color-text-hint);
+  font-weight: 300;
+}
+
+.field-textarea:hover {
+  border-color: #b0bacc;
+}
+
+.field-textarea:focus {
+  outline: none;
+  border-color: var(--color-border-focus);
+  box-shadow: var(--shadow-focus);
+}
+
+/* Validación: campo requerido vacío tras intento de envío */
+.field-textarea:invalid:not(:placeholder-shown) {
+  border-color: #dc2626;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding-top: var(--space-2);
+  flex-wrap: wrap;
+}
+
+
+/* ──────────────────────────────────────────
+   7. BOTONES
+────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-body);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1;
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--transition),
+              color var(--transition),
+              border-color var(--transition),
+              box-shadow var(--transition),
+              opacity var(--transition);
+  user-select: none;
+}
+
+.btn:focus-visible {
+  box-shadow: var(--shadow-focus);
+}
+
+/* Primario: acción principal */
+.btn-primary {
+  background-color: var(--color-accent);
+  color: #ffffff;
+  border-color: var(--color-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--color-accent-dark);
+  border-color: var(--color-accent-dark);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+/* Secundario: acción de apoyo */
+.btn-secondary {
+  background-color: var(--color-surface);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--color-accent-pale);
+}
+
+/* Estado copiado (aplicado por JS) */
+.btn-secondary.copiado {
+  background-color: var(--color-success-pale);
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+/* Fantasma: acción terciaria */
+.btn-ghost {
+  background-color: transparent;
+  color: var(--color-text-muted);
+  border-color: var(--color-border);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background-color: var(--color-ghost-hover);
+  color: var(--color-text);
+}
+
+/* Tamaño pequeño */
+.btn-sm {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--fs-xs);
+}
+
+/* Estado deshabilitado */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn-icon {
+  font-size: 1em;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+
+/* ──────────────────────────────────────────
+   8. ZONA DE OUTPUT
+────────────────────────────────────────── */
+
+.prompt-display {
+  min-height: 140px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-output-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5) var(--space-6);
+  margin-bottom: var(--space-4);
+  overflow: auto;
+  transition: border-color var(--transition);
+}
+
+.prompt-display:focus {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+/* Texto de estado vacío */
+.prompt-placeholder {
+  font-size: var(--fs-sm);
+  color: var(--color-text-hint);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.prompt-placeholder strong {
+  color: var(--color-text-muted);
+  font-style: normal;
+}
+
+/* Texto del prompt generado */
+.prompt-text {
+  font-family: var(--font-mono);
+  font-size: var(--fs-sm);
+  line-height: 1.75;
+  color: var(--color-text);
+  white-space: pre-wrap;
+  word-break: break-word;
+  margin: 0;
+}
+
+/* Metadatos bajo el output */
+.output-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  padding-top: var(--space-2);
+  border-top: 1px solid var(--color-output-border);
+}
+
+.meta-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--color-accent);
+  color: #ffffff;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  border-radius: 99px;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.meta-chars {
+  font-size: var(--fs-xs);
+  color: var(--color-text-hint);
+  font-variant-numeric: tabular-nums;
+}
+
+.meta-note {
+  font-size: var(--fs-xs);
+  color: var(--color-text-hint);
+  font-style: italic;
+  margin-left: auto;
+}
+
+
+/* ──────────────────────────────────────────
+   9. NOTA PEDAGÓGICA
+────────────────────────────────────────── */
+
+.pedagogy-note {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+  padding: var(--space-5) var(--space-6);
+  background-color: var(--color-note-bg);
+  border: 1px solid var(--color-note-border);
+  border-left-width: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.note-icon {
+  font-size: 1.25rem;
+  line-height: 1.5;
+  flex-shrink: 0;
+}
+
+.pedagogy-note p {
+  font-size: var(--fs-sm);
+  color: var(--color-text-muted);
+  line-height: 1.65;
+}
+
+.pedagogy-note em {
+  color: var(--color-text);
+  font-style: normal;
+  font-weight: 500;
+}
+
+
+/* ──────────────────────────────────────────
+  10. PIE DE PÁGINA
+────────────────────────────────────────── */
+
+.site-footer {
+  margin-top: auto;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-10) var(--space-6);
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: start;
+  gap: var(--space-8);
+}
+
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-display);
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  color: var(--color-text-muted);
+  letter-spacing: 0.03em;
+}
+
+.footer-brand em {
+  color: var(--color-accent);
+  font-style: normal;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+}
+
+.footer-link {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-accent);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+.footer-link:hover {
+  color: var(--color-accent-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-authors {
+  text-align: right;
+}
+
+.authors-label {
+  font-size: var(--fs-xs);
+  color: var(--color-text-hint);
+  margin-bottom: var(--space-1);
+  font-weight: 400;
+}
+
+.authors-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-items: flex-end;
+}
+
+.authors-list li {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.authors-course {
+  font-size: var(--fs-xs);
+  color: var(--color-text-hint);
+  margin-top: var(--space-2);
+  font-style: italic;
+}
+
+
+/* ──────────────────────────────────────────
+  11. UTILIDADES Y ESTADOS
+────────────────────────────────────────── */
+
+/* Clase para ocultar/mostrar con JS (alternativa a hidden) */
+.hidden { display: none !important; }
+
+/* Visualmente oculto pero accesible */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Indicador de carga (app.js añade clase .loading al botón) */
+.btn-primary.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  position: relative;
+}
+
+.btn-primary.loading::after {
+  content: '';
+  display: inline-block;
+  width: 0.875em;
+  height: 0.875em;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  margin-left: var(--space-2);
+  animation: spin 0.7s linear infinite;
+  vertical-align: middle;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Animación de aparición del prompt */
+.prompt-text {
+  animation: fadeIn 0.25s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ──────────────────────────────────────────
+  12. RESPONSIVE — MÓVIL (< 640px)
+────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+
+  :root {
+    --fs-xl:  1.5rem;
+    --fs-lg:  1.25rem;
+  }
+
+  main {
+    padding: var(--space-6) var(--space-4) var(--space-12);
+  }
+
+  .panel {
+    padding: var(--space-6) var(--space-5);
+  }
+
+  /* Una columna en móvil */
+  .case-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .form-actions .btn {
+    justify-content: center;
+  }
+
+  .output-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  .meta-note {
+    margin-left: 0;
+  }
+
+  /* Footer: una columna */
+  .footer-inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+    text-align: center;
+  }
+
+  .footer-brand {
+    justify-content: center;
+  }
+
+  .footer-authors {
+    text-align: center;
+  }
+
+  .authors-list {
+    align-items: center;
+  }
+
+  /* Ocultar el enlace del repo en línea; mostrar centrado */
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .site-title { font-size: 1.35rem; }
+  .site-subtitle { font-size: var(--fs-base); }
+}

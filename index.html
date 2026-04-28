@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Decision Pilot IA — Estructura decisiones complejas con inteligencia artificial." />
+  <title>Decision Pilot IA</title>
+
+  <!-- Google Fonts: display + body pairing -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- ═══════════════════════════════════════
+       CABECERA
+  ════════════════════════════════════════ -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+
+      <div class="brand">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span class="brand-name">Decision Pilot <em>IA</em></span>
+      </div>
+
+      <div class="header-description">
+        <h1 class="site-title">Estructura tus decisiones complejas con IA</h1>
+        <p class="site-subtitle">
+          Selecciona un caso, completa el contexto y genera un prompt optimizado
+          listo para usar en cualquier modelo de lenguaje. La IA no decide por ti
+          — te ayuda a pensar mejor.
+        </p>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════
+       CONTENIDO PRINCIPAL
+  ════════════════════════════════════════ -->
+  <main id="main-content" role="main">
+
+    <!-- ── PASO 1: Selector de caso ──────── -->
+    <section class="panel" id="panel-caso" aria-labelledby="label-caso">
+
+      <div class="panel-header">
+        <span class="step-badge">01</span>
+        <h2 class="panel-title" id="label-caso">Elige tu caso de uso</h2>
+      </div>
+
+      <div class="case-grid" role="radiogroup" aria-labelledby="label-caso">
+
+        <label class="case-card" for="caso-admision">
+          <input
+            class="case-radio"
+            type="radio"
+            id="caso-admision"
+            name="caso"
+            value="admision"
+            checked
+          />
+          <span class="case-icon" aria-hidden="true">🎓</span>
+          <span class="case-title">Admisión y becas universitarias</span>
+          <span class="case-desc">Evalúa candidatos, criterios académicos y financieros.</span>
+        </label>
+
+        <label class="case-card" for="caso-ti">
+          <input
+            class="case-radio"
+            type="radio"
+            id="caso-ti"
+            name="caso"
+            value="it-support"
+          />
+          <span class="case-icon" aria-hidden="true">🖥️</span>
+          <span class="case-title">Tickets internos de soporte TI</span>
+          <span class="case-desc">Prioriza, clasifica y resuelve incidencias técnicas.</span>
+        </label>
+
+        <label class="case-card" for="caso-ecommerce">
+          <input
+            class="case-radio"
+            type="radio"
+            id="caso-ecommerce"
+            name="caso"
+            value="ecommerce-fraude"
+          />
+          <span class="case-icon" aria-hidden="true">📦</span>
+          <span class="case-title">Devoluciones y fraude en e-commerce</span>
+          <span class="case-desc">Analiza patrones sospechosos y decisiones de reembolso.</span>
+        </label>
+
+        <label class="case-card" for="caso-docs">
+          <input
+            class="case-radio"
+            type="radio"
+            id="caso-docs"
+            name="caso"
+            value="documentacion-corp"
+          />
+          <span class="case-icon" aria-hidden="true">📋</span>
+          <span class="case-title">Documentación corporativa interna</span>
+          <span class="case-desc">Genera, actualiza y estructura manuales y políticas.</span>
+        </label>
+
+      </div>
+    </section>
+
+
+    <!-- ── PASO 2: Formulario de contexto ── -->
+    <section class="panel" id="panel-form" aria-labelledby="label-form">
+
+      <div class="panel-header">
+        <span class="step-badge">02</span>
+        <h2 class="panel-title" id="label-form">Describe tu situación</h2>
+      </div>
+
+      <form id="decision-form" novalidate autocomplete="off">
+
+        <fieldset class="form-group">
+          <label class="field-label" for="campo-contexto">
+            Contexto general
+            <span class="field-hint">¿Cuál es la situación de partida?</span>
+          </label>
+          <textarea
+            id="campo-contexto"
+            name="contexto"
+            class="field-textarea"
+            rows="3"
+            placeholder="Ej: Somos una universidad privada con 200 solicitudes de beca para 40 plazas disponibles este semestre…"
+            required
+            aria-required="true"
+          ></textarea>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label class="field-label" for="campo-decision">
+            Decisión que necesitas tomar
+            <span class="field-hint">Formula la pregunta central con precisión.</span>
+          </label>
+          <textarea
+            id="campo-decision"
+            name="decision"
+            class="field-textarea"
+            rows="3"
+            placeholder="Ej: ¿Qué candidatos deben recibir la beca completa y cuáles la parcial?"
+            required
+            aria-required="true"
+          ></textarea>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label class="field-label" for="campo-datos">
+            Datos disponibles
+            <span class="field-hint">Lista los datos, métricas o documentos que tienes.</span>
+          </label>
+          <textarea
+            id="campo-datos"
+            name="datos"
+            class="field-textarea"
+            rows="3"
+            placeholder="Ej: Expediente académico, carta de motivación, nivel de ingresos familiares, entrevista personal…"
+          ></textarea>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label class="field-label" for="campo-restricciones">
+            Restricciones y criterios clave
+            <span class="field-hint">¿Qué condiciones no se pueden ignorar?</span>
+          </label>
+          <textarea
+            id="campo-restricciones"
+            name="restricciones"
+            class="field-textarea"
+            rows="3"
+            placeholder="Ej: Presupuesto máximo 80.000 €, al menos 30% para primera generación universitaria, política antidiscriminación vigente…"
+          ></textarea>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="button" id="btn-generar" class="btn btn-primary" aria-controls="zona-prompt">
+            <span class="btn-icon" aria-hidden="true">⚡</span>
+            Generar prompt estructurado
+          </button>
+          <button type="reset" id="btn-limpiar" class="btn btn-ghost">
+            <span class="btn-icon" aria-hidden="true">↺</span>
+            Limpiar campos
+          </button>
+        </div>
+
+      </form>
+    </section>
+
+
+    <!-- ── PASO 3: Zona de output ─────────── -->
+    <section
+      class="panel panel-output"
+      id="panel-output"
+      aria-labelledby="label-output"
+      aria-live="polite"
+    >
+
+      <div class="panel-header">
+        <span class="step-badge">03</span>
+        <h2 class="panel-title" id="label-output">Prompt generado</h2>
+        <button
+          type="button"
+          id="btn-copiar"
+          class="btn btn-secondary btn-sm"
+          aria-label="Copiar prompt al portapapeles"
+          disabled
+        >
+          <span class="btn-icon" aria-hidden="true">⎘</span>
+          Copiar
+        </button>
+      </div>
+
+      <article
+        id="zona-prompt"
+        class="prompt-display"
+        role="region"
+        aria-label="Resultado del prompt estructurado"
+        tabindex="0"
+      >
+        <p class="prompt-placeholder" id="prompt-placeholder">
+          El prompt aparecerá aquí una vez que completes los campos y pulses
+          <strong>Generar prompt estructurado</strong>.
+        </p>
+        <pre id="prompt-texto" class="prompt-text" hidden aria-hidden="true"></pre>
+      </article>
+
+      <div class="output-meta" id="output-meta" hidden>
+        <span class="meta-badge" id="meta-caso-label">—</span>
+        <span class="meta-chars" id="meta-chars">0 caracteres</span>
+        <span class="meta-note">Puedes editar el prompt antes de usarlo en tu modelo.</span>
+      </div>
+
+    </section>
+
+
+    <!-- ── NOTA PEDAGÓGICA ────────────────── -->
+    <aside class="pedagogy-note" role="complementary" aria-label="Nota educativa">
+      <span class="note-icon" aria-hidden="true">💡</span>
+      <p>
+        <strong>¿Por qué un prompt estructurado?</strong>
+        Un buen prompt no es una petición genérica — es la combinación de
+        <em>rol</em>, <em>contexto</em>, <em>restricciones</em> y
+        <em>formato de salida</em> esperado. Esta app construye esa estructura
+        por ti para que aprendas el patrón y lo repliques en otros contextos.
+      </p>
+    </aside>
+
+  </main>
+
+
+  <!-- ═══════════════════════════════════════
+       PIE DE PÁGINA
+  ════════════════════════════════════════ -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+
+      <div class="footer-brand">
+        <span class="brand-icon" aria-hidden="true">✦</span>
+        <span>Decision Pilot <em>IA</em></span>
+      </div>
+
+      <nav class="footer-links" aria-label="Enlaces del proyecto">
+        <a
+          href="https://github.com/tu-usuario/decision-pilot-ia"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="footer-link"
+          id="repo-link"
+        >
+          Ver repositorio en GitHub →
+        </a>
+      </nav>
+
+      <div class="footer-authors">
+        <p class="authors-label">Proyecto desarrollado por</p>
+        <ul class="authors-list" id="authors-list">
+          <li>Autor 1</li>
+          <li>Autor 2</li>
+          <li>Autor 3</li>
+        </ul>
+        <p class="authors-course">Curso de Gestión de Proyectos · 2025</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ═══════════════════════════════════════
+       SCRIPTS
+       Orden: prompts primero (datos),
+              app después (lógica que los usa)
+  ════════════════════════════════════════ -->
+  <script src="prompts.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
